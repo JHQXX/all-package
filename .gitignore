@@ -31,3 +31,7 @@ Thumbs.db
 # 日志
 *.log
 logs/
+
+# Maven Archetype
+maven-archetype/target/
+maven-archetype/repo/
