@@ -1,0 +1,51 @@
+# ============================================================
+# Nexus 3 个人私有 Maven 仓库
+# ============================================================
+# 域名: nexus.azhi-home.top
+# 端口: 8081 (容器内) -> 127.0.0.1:8081 (主机)
+# ⚠️ 不要直接把 8081 暴露到公网！用 Nginx 转发
+#
+# 使用步骤：
+#   1. cp .env.example .env
+#   2. 编辑 .env，填 NEXUS_ADMIN_PASSWORD
+#   3. docker compose up -d
+#   4. 等 1-2 分钟，访问 http://localhost:8081
+#   5. 首次登录：admin / NEXUS_ADMIN_PASSWORD
+# ============================================================
+
+services:
+  nexus:
+    image: sonatype/nexus3:3.69.0
+    container_name: nexus
+    restart: always
+    ports:
+      # ⚠️ 关键：只绑定到 127.0.0.1，不暴露到公网
+      # 公网访问通过 Nginx 代理（见 nginx.conf）
+      - "127.0.0.1:8081:8081"
+    volumes:
+      # 数据持久化
+      - nexus-data:/nexus-data
+      # 时区
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      # 跳过安装向导（可选）
+      - INSTALL4J_ADD_VM_PARAMS=-Xms1g -Xmx1g
+    # 健康检查
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/service/rest/v1/status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    # 安全选项
+    security_opt:
+      - no-new-privileges:true
+    # 资源限制（可选，按需调整）
+    # deploy:
+    #   resources:
+    #     limits:
+    #       memory: 2G
+
+volumes:
+  nexus-data:
+    name: nexus-data
