@@ -50,7 +50,8 @@ def build_sample_vector_store():
 
     # 如果知识库目录为空，先创建示例文档
     if not any(kb_path.glob("*.txt")):
-        from . import 01_document_loader  # 直接用 loader 模块创建
+        import importlib
+        loader_module = importlib.import_module("01_document_loader")
         # 实际上我们直接创建
         docs = [
             Document(
