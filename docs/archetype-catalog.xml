@@ -10,8 +10,8 @@
             <artifactId>springai-agent-archetype</artifactId>
             <version>1.0.0</version>
             <repository>
-                <id>github-jhqxx</id>
-                <url>https://raw.githubusercontent.com/JHQXX/ai-siyuan-agent/main/maven-archetype/repo/</url>
+                <id>github-pages-jhqxx</id>
+                <url>https://jhqxx.github.io/ai-siyuan-agent/repo/</url>
             </repository>
             <description>
                 Spring Boot 3 + Spring AI 智能体项目脚手架。
