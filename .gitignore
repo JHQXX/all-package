@@ -1,5 +1,6 @@
 # Maven 构建产物
 **/target/
+**/repo/
 *.jar
 *.pom
 *.pom.asc
@@ -9,6 +10,8 @@
 
 # 临时发布文件
 central-bundle.zip
+public-key.asc
+.cleanup-at
 
 # Python
 __pycache__/

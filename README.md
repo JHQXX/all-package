@@ -1,99 +1,65 @@
 # All Package - 脚手架集合
 
-> 一站式项目脚手架仓库，包含多种技术栈的项目模板。
+> 一个仓库统一管理所有语言的脚手架，按目录分类。
+
+[![Maven Central](https://img.shields.io/badge/Maven%20Central-1.0.0-blue)](https://repo.maven.apache.org/maven2/io/github/jhqxx/springai-agent-archetype/)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-LIVE-green)](https://jhqxx.github.io/all-package/)
 
 ---
 
-## 📦 包含的脚手架
+## 📦 已发布的脚手架
 
-### 1. SpringAI 智能体脚手架（Java）
-
-基于 Spring Boot 3 + Spring AI 的 Java 智能体项目模板。
-
-**特点：**
-- ✅ ChatClient 对话客户端
-- ✅ @Tool 工具调用注解
-- ✅ RAG 检索增强生成
-- ✅ 向量存储（SimpleVectorStore）
-- ✅ REST API 接口
-- ✅ 完整的分层结构（config/controller/service/tools/dto）
-
-**使用方式：**
-
-#### 方式一：Maven Archetype（推荐）
-
-```bash
-mvn archetype:generate \
-  -DarchetypeGroupId=io.github.jhqxx \
-  -DarchetypeArtifactId=springai-agent-archetype \
-  -DarchetypeVersion=1.0.0 \
-  -DgroupId=你的groupID \
-  -DartifactId=项目名 \
-  -Dpackage=你的完整包名 \
-  -DinteractiveMode=false
-```
-
-#### 方式二：克隆模板项目
-
-```bash
-# 克隆 template 目录作为起点
-git clone <仓库地址> my-project
-# 然后使用 IDEA 的 Refactor → Rename 修改包名
-```
-
-#### 方式三：Python 脚本生成
-
-```bash
-python3 springai_scaffold.py 项目名 --group-id com.mycompany
-```
+| 脚手架 | 语言/框架 | 状态 | 说明 |
+|--------|-----------|------|------|
+| [springai-agent-archetype](maven/spring-ai-agent/archetype/) | Java + Spring AI | ✅ Maven Central 1.0.0 | Spring Boot 3 + Spring AI 智能体脚手架 |
+| [demo-agent](maven/demo/demo-agent/) | Java + Spring AI | ✅ 示例 | 从脚手架生成的项目示例 |
 
 ---
 
-### 2. Python 智能体脚手架
-
-基于 LangChain 的 Python 智能体项目模板。
-
-**使用方式：**
-
-```bash
-python3 scaffold.py 项目名
-```
-
----
-
-## 📁 目录结构
+## 📁 项目结构
 
 ```
 all-package/
-├── maven-archetype/          # Maven Archetype 源码
-│   ├── pom.xml
-│   └── src/main/resources/
-│       ├── META-INF/maven/
-│       │   └── archetype-metadata.xml
-│       └── archetype-resources/  # 模板文件
-│           ├── pom.xml
-│           └── src/
-├── template/                 # 模板项目（克隆用）
-│   ├── pom.xml
-│   └── src/
-├── demo-agent/               # 示例项目（可直接运行）
-│   ├── pom.xml
-│   └── src/
-├── docs/                     # GitHub Pages 托管
-│   ├── repo/                 # Maven 仓库（archetype jar）
-│   ├── archetype-catalog.xml # Archetype 目录
-│   └── index.html
-├── springai_scaffold.py      # SpringAI 脚手架生成脚本
-├── scaffold.py               # Python 脚手架生成脚本
-├── build_and_publish.py      # 构建发布脚本
+├── maven/                           # Maven/Java 相关脚手架
+│   ├── spring-ai-agent/            # Spring AI 智能体脚手架
+│   │   └── archetype/               # Maven Archetype 源码
+│   │       ├── pom.xml
+│   │       ├── build-and-pack.sh   # 🔨 一键打包 + 上传准备
+│   │       ├── clean-publish.sh    # 🧹 手动清理脚本
+│   │       └── src/main/resources/archetype-resources/  # 模板文件
+│   └── demo/demo-agent/             # 可运行的示例项目
+├── python/                          # Python 脚手架（未来扩展）
+├── docs/                            # GitHub Pages（部署后是网站）
+│   ├── index.html                   # 🌐 项目首页
+│   ├── jhqxx-catalog.xml            # 🎯 IDEA 用的私有 Catalog
+│   └── archetype-catalog.xml        # Maven Central 兼容的 Catalog
 └── README.md
 ```
 
 ---
 
-## 🚀 快速开始
+## 🚀 在 IDEA 中使用（推荐 ⭐）
 
-### 生成 SpringAI 项目
+### 一次性配置
+
+**步骤 1**：添加 GitHub Pages Catalog
+```
+File → New → Project → Maven Archetype → Manage catalogs...
+→ 点 "+" → Add Catalog
+→ Location: https://jhqxx.github.io/all-package/jhqxx-catalog.xml
+→ Name: JHQXX 脚手架
+→ OK
+```
+
+**步骤 2**：使用脚手架
+```
+File → New → Project → Maven Archetype
+→ 选中 jhqxx-catalog
+→ 只看得到 JHQXX 自己的脚手架，干净！
+→ 选 springai-agent-archetype:1.0.0
+```
+
+### 通过命令行使用
 
 ```bash
 mvn archetype:generate \
@@ -104,48 +70,63 @@ mvn archetype:generate \
   -DartifactId=my-agent \
   -Dpackage=com.example.agent \
   -DinteractiveMode=false
-
-cd my-agent
-
-# 配置环境变量
-cp .env.example .env
-# 编辑 .env 填入 OPENAI_API_KEY
-
-# 运行
-./mvnw spring-boot:run
 ```
 
 ---
 
-## 🔧 构建与发布（维护者用）
+## 🔧 维护指南
 
-### 重新构建 Archetype
+### 🏗️ 修改已发布的脚手架
+
+修改 `maven/spring-ai-agent/archetype/src/main/resources/archetype-resources/` 下的文件，然后：
 
 ```bash
-cd maven-archetype
-mvn clean install
+cd maven/spring-ai-agent/archetype
+bash build-and-pack.sh     # 构建并生成 central-bundle.zip
+# 上传到 https://central.sonatype.com/publishing
 ```
 
-### 发布到 GitHub Pages
+详细发布流程：见 [PUBLISH_GUIDE.md](PUBLISH_GUIDE.md)
+
+### ➕ 添加新的脚手架
+
+1. 创建新目录：`maven/your-scaffold/` 或 `python/your-scaffold/`
+2. 按照已有的 `spring-ai-agent/archetype/` 结构组织
+3. 修改 `build-and-pack.sh` 适配你的脚手架
+4. 更新 README 的「已发布的脚手架」表格
+
+### 🧹 清理发布产物
+
+archetype 目录下的产物（zip、target/）应该会自动清理。如果要**立即**清理：
 
 ```bash
-python3 build_and_publish.py
+cd maven/spring-ai-agent/archetype
+bash clean-publish.sh
 ```
 
 ---
 
-## 📚 技术栈
+## 🔗 相关链接
 
-| 脚手架 | 技术栈 | 说明 |
-|--------|--------|------|
-| SpringAI 智能体 | Spring Boot 3 + Spring AI 1.0 | Java 生态智能体开发 |
-| Python 智能体 | LangChain + FAISS | Python 生态智能体开发 |
+- 🌐 项目首页：https://jhqxx.github.io/all-package/
+- 🎯 私有 Catalog：https://jhqxx.github.io/all-package/jhqxx-catalog.xml
+- 📦 Maven Central：https://repo.maven.apache.org/maven2/io/github/jhqxx/springai-agent-archetype/
+- 🐙 GitHub：https://github.com/JHQXX/all-package
 
 ---
 
-## 📝 更新日志
+## 📚 文档
 
-### v1.0.0
-- SpringAI 智能体脚手架发布
-- Maven Archetype 支持
-- Python 脚手架脚本支持
+- [PUBLISH_GUIDE.md](PUBLISH_GUIDE.md) - 如何发布到 Maven Central
+- [TROUBLESHOOTING.md](TROUBLESHOOTING.md) - 常见问题与解决
+
+---
+
+## 🎉 当前进度
+
+```
+✅ 已发布: springai-agent-archetype 1.0.0
+✅ GitHub Pages 在线
+✅ 在 IDEA 中可通过私有 Catalog 直接看到
+⏳ 待做: 添加更多脚手架（Python、RAG、Web Agent 等）
+```
