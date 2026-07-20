@@ -19,7 +19,7 @@ cd "${SCRIPT_DIR}"
 
 GROUP_PATH="io/github/jhqxx"
 ARTIFACT_ID="springai-agent-archetype"
-VERSION="1.0.2"
+VERSION="1.0.3"
 OUTPUT_ZIP="central-bundle.zip"
 PACK_DIR_NAME=".publish-pack"     # 临时目录，藏在 archetype 下
 PACK_DIR="${SCRIPT_DIR}/${PACK_DIR_NAME}"

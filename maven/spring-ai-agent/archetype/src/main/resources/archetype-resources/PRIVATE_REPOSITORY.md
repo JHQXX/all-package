@@ -1,10 +1,16 @@
 # 🏠 私有 Maven 仓库（jhqxx）使用指南
 
-本项目已**预配置**了 JHQXX 私有 Nexus 仓库，仓库 ID 为 `jhqxx`。
-地址：`https://nexus.azhi-home.top/repository/my-private-maven/`
+本项目已**默认启用** JHQXX 私有 Nexus 仓库。
 
-⚠️ **重要**：Nexus 已禁用匿名访问（Disable anonymous access），
-所有操作（拉包、上传）都需要账号密码认证。
+| 配置项 | 值 |
+|--------|-----|
+| 仓库 ID | `jhqxx` |
+| URL | `https://nexus.azhi-home.top/repository/my-private-maven/` |
+| 模式 | Disable anonymous access（需认证） |
+| 用途 | 拉取/发布私有包 |
+
+⚠️ **Nexus 部署在你家里**（`192.168.31.36`），通过你的内网穿透暴露到公网。
+**所有操作（拉包、上传）都需要账号密码认证。**
 
 ---
 
@@ -26,27 +32,11 @@
 
 ---
 
-## 📥 场景 1：拉取私有包（作为依赖）
+## 📦 仓库怎么用
 
-**取消注释** pom.xml 里 `<repositories>` 中的内容：
+### 拉包（自动启用）
 
-```xml
-<repositories>
-    <repository>
-        <id>jhqxx</id>
-        <name>JHQXX Private Nexus</name>
-        <url>https://nexus.azhi-home.top/repository/my-private-maven/</url>
-        <releases>
-            <enabled>true</enabled>
-        </releases>
-        <snapshots>
-            <enabled>false</enabled>
-        </snapshots>
-    </repository>
-</repositories>
-```
-
-然后像使用普通依赖一样：
+pom.xml 里已经默认启用 jhqxx 仓库，像普通依赖一样：
 
 ```xml
 <dependencies>
@@ -58,65 +48,50 @@
 </dependencies>
 ```
 
-Maven 会自动用 `admin/你的密码` 去 `jhqxx` 仓库拉包。
+Maven 会自动用 `admin/你的密码` 去 jhqxx 仓库拉包。
 
----
+### 发布包（自动启用）
 
-## 📤 场景 2：发布包到 Nexus
-
-**取消注释** pom.xml 里 `<distributionManagement>` 中的内容：
-
-```xml
-<distributionManagement>
-    <repository>
-        <id>jhqxx</id>
-        <name>JHQXX Private Nexus</name>
-        <url>https://nexus.azhi-home.top/repository/my-private-maven/</url>
-    </repository>
-</distributionManagement>
-```
-
-然后执行：
+直接执行：
 
 ```bash
 mvn clean deploy
 ```
 
-会自动推送到你的 Nexus。
+自动推送到 `https://nexus.azhi-home.top/repository/my-private-maven/`。
 
 ---
 
 ## 🔧 IDEA 中配置
 
-**Windows / macOS / Linux 都一样**：
-
 1. **File** → **Settings** → **Build, Execution, Deployment** → **Maven**
-2. 点 **"Override"** 旁边的 User settings file
-3. 选择你的 `~/.m2/settings.xml`
-4. 保存
-
-之后 IDEA 会用 settings.xml 里的认证信息。
+2. 确认 **User settings file** 指向你的 `~/.m2/settings.xml`
+3. 保存
 
 ---
 
 ## 🧪 测试认证是否生效
 
-### 测试 1：拉一个包
+### 测试 1：拉一个不存在的包（验证认证）
+
 ```bash
 mvn dependency:get \
   -Dartifact=com.lizhi:my-private-lib:1.0.0 \
   -DremoteRepositories=jhqxx::default::https://nexus.azhi-home.top/repository/my-private-maven/
 ```
 
-成功 = 看到 `BUILD SUCCESS`
-失败 = 看到 401 Unauthorized → 检查密码
+| 结果 | 含义 |
+|------|------|
+| `BUILD SUCCESS` | ✅ 认证通过，包拉到了 |
+| `401 Unauthorized` | ❌ 密码错，检查 settings.xml |
+| `404 Not Found` | ✅ 认证通过，但包不存在（正常） |
 
-### 测试 2：发布包
-```bash
-mvn deploy
-```
+### 测试 2：发布一个 demo 包
 
-应该上传到 `https://nexus.azhi-home.top/repository/my-private-maven/`
+1. 临时改 pom.xml 的 `<version>` 为 `1.0.0-test`
+2. `mvn clean deploy`
+3. 看是否上传成功
+4. 在 Nexus 网页（https://nexus.azhi-home.top）Browse 仓库，能看到刚上传的包
 
 ---
 
@@ -129,28 +104,36 @@ mvn deploy
 ```
 
 **解决**：
-1. 检查 `~/.m2/settings.xml` 里 `<server><id>` 跟 pom.xml 里 `<repository><id>` 是否一致
+1. 检查 `~/.m2/settings.xml` 里 `<server><id>` 跟 pom.xml 里 `<repository><id>` 都是 `jhqxx`
 2. 检查密码是否正确
-3. 试试直接在浏览器访问 URL，看能不能打开
+3. 试试 `curl -u admin:密码 https://nexus.azhi-home.top/`
 
-### Q: 报 Could not resolve dependencies
-
-```
-[ERROR] Could not resolve dependencies for project... Could not find artifact...
-```
+### Q: 报 Could not resolve dependencies / Connection refused
 
 **可能原因**：
-1. 仓库 URL 写错了
-2. 仓库名字不对（你 Nexus 里叫 `my-private-maven` 还是其他？）
+1. Nexus 没启动（`docker ps | grep nexus`）
+2. 内网穿透挂了
+3. 域名解析失败
 
 **解决**：
-1. 打开 Nexus：`https://nexus.azhi-home.top`
-2. 齿轮 → **Repositories** 看真实仓库名
-3. 同步更新 pom.xml 里的 URL
+1. 服务器上检查：`docker ps | grep nexus`
+2. 直接 IP 访问测试：`curl -u admin:密码 http://192.168.31.36:8081`
+3. 公网域名测试：`curl -u admin:密码 https://nexus.azhi-home.top`
 
-### Q: 如何完全禁用 Nexus 配置？
+### Q: 想完全不用 jhqxx 仓库
 
-不需要 Nexus 时，把 pom.xml 里 `<repositories>` 和 `<distributionManagement>` 的注释加上即可。
+不需要 Nexus 时，删除或注释 pom.xml 里的这两段：
+
+```xml
+<!-- 注释掉 -->
+<repositories>
+    <repository>...</repository>
+</repositories>
+
+<distributionManagement>
+    <repository>...</repository>
+</distributionManagement>
+```
 
 ---
 
@@ -158,15 +141,16 @@ mvn deploy
 
 | 仓库 | 用途 | 用法 |
 |------|------|------|
-| Maven Central | 公共包（Spring、Apache 等） | 默认就支持，无需配置 |
-| **jhqxx** (Nexus) | 你的私有包 | 需要手动取消注释启用 |
+| Maven Central | 公共包（Spring、Apache 等） | 默认支持 |
+| **jhqxx** (Nexus) | 你的私有包 | 本项目已默认启用 |
 
 两者**互不影响**：
-- 默认只走 Maven Central
-- 启用 jhqxx 后，私有包从 Nexus 拉，公共包还是从 Maven Central 拉
+- 公共包从 Maven Central 拉（自动）
+- 私有包从 jhqxx 拉（需要时）
 
 ---
 
 ## 📚 部署你自己的 Nexus？
 
-参考父仓库的 [nexus/](https://github.com/JHQXX/all-package/tree/main/nexus) 目录，里面有完整的 `docker-compose.yml`，一键启动。
+参考父仓库的 [nexus/](https://github.com/JHQXX/all-package/tree/main/nexus) 目录，
+里面有完整的 `docker-compose.yml`，一键启动。

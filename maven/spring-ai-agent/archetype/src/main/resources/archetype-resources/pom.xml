@@ -93,12 +93,10 @@
                  <password>你的密码</password>
              </server>
 
-        2. 需要使用私有包时，取消下面 <repositories> 的注释
-        3. 需要发布包时，取消下面 <distributionManagement> 的注释
+        2. jhqxx 仓库已默认启用，会同时作为依赖源和发布目标
         ============================================================
     -->
     <repositories>
-        <!--
         <repository>
             <id>jhqxx</id>
             <name>JHQXX Private Nexus</name>
@@ -110,17 +108,14 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
-        -->
     </repositories>
 
     <distributionManagement>
-        <!--
         <repository>
             <id>jhqxx</id>
             <name>JHQXX Private Nexus</name>
             <url>https://nexus.azhi-home.top/repository/my-private-maven/</url>
         </repository>
-        -->
     </distributionManagement>
 
     <build>
