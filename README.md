@@ -42,11 +42,19 @@ all-package/
 
 ### 一次性配置
 
-**步骤 1**：添加 GitHub Pages Catalog
+**步骤 1**：添加 Catalog（推荐 jsDelivr ⭐）
+
+打开 IDEA 添加 Catalog 的时候，**两个都试一下**，谁快用谁：
+
+| 优先级 | Location | 优点 |
+|--------|----------|------|
+| ⭐ 首选 | `https://cdn.jsdelivr.net/gh/JHQXX/all-package/docs/jhqxx-catalog.xml` | 全球 CDN、推送即生效、国内可用 |
+| 备用 | `https://jhqxx.github.io/all-package/jhqxx-catalog.xml` | GitHub 原生、但国内偶有超时 |
+
 ```
 File → New → Project → Maven Archetype → Manage catalogs...
 → 点 "+" → Add Catalog
-→ Location: https://jhqxx.github.io/all-package/jhqxx-catalog.xml
+→ Location: 上面的 URL（推荐 jsDelivr）
 → Name: JHQXX 脚手架
 → OK
 ```
