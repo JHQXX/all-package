@@ -25,12 +25,17 @@
                 <include>**/*.java</include>
             </includes>
         </fileSet>
-        <fileSet filtered="true">
+        <fileSet filtered="false">
             <directory>src/main/resources</directory>
             <includes>
                 <include>**/*.yml</include>
                 <include>**/*.yaml</include>
                 <include>**/*.properties</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true">
+            <directory>src/main/resources</directory>
+            <includes>
                 <include>**/*.st</include>
                 <include>**/*.txt</include>
             </includes>
