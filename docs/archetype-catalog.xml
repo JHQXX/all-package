@@ -10,12 +10,13 @@
             <artifactId>springai-agent-archetype</artifactId>
             <version>1.0.0</version>
             <repository>
-                <id>github-pages-jhqxx</id>
-                <url>https://jhqxx.github.io/ai-siyuan-agent/repo/</url>
+                <id>central</id>
+                <url>https://repo.maven.apache.org/maven2</url>
             </repository>
             <description>
                 Spring Boot 3 + Spring AI 智能体项目脚手架。
                 包含 ChatClient、@Tool 工具调用、RAG 向量存储、REST API。
+                从 Maven Central 下载。
             </description>
         </archetype>
     </archetypes>

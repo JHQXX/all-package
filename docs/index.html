@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Siyuan Agent - SpringAI 项目脚手架</title>
+    <title>JHQXX All-Package - 智能体项目脚手架</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -13,143 +13,125 @@
             padding: 40px 20px;
             color: #333;
         }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
+        .container { max-width: 900px; margin: 0 auto; }
         .hero {
-            background: white;
-            border-radius: 12px;
-            padding: 40px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-            text-align: center;
+            background: white; border-radius: 12px; padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1); margin-bottom: 30px; text-align: center;
         }
-        h1 {
-            color: #2c3e50;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-        .subtitle {
-            color: #7f8c8d;
-            font-size: 1.1em;
-            margin-bottom: 30px;
-        }
+        h1 { color: #2c3e50; font-size: 2.5em; margin-bottom: 10px; }
+        .subtitle { color: #7f8c8d; font-size: 1.1em; margin-bottom: 30px; }
         .badge {
-            display: inline-block;
-            background: #667eea;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            margin: 5px;
+            display: inline-block; background: #667eea; color: white;
+            padding: 5px 15px; border-radius: 20px; font-size: 0.9em; margin: 5px;
         }
+        .badge.green { background: #28a745; }
         .card {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
+            background: white; border-radius: 12px; padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1); margin-bottom: 20px;
         }
         h2 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
+            color: #2c3e50; margin-bottom: 15px; padding-bottom: 10px;
             border-bottom: 2px solid #667eea;
         }
         .url-box {
-            background: #f8f9fa;
-            border-left: 4px solid #667eea;
-            padding: 15px 20px;
-            border-radius: 4px;
-            margin: 15px 0;
-            font-family: "SF Mono", Monaco, monospace;
-            font-size: 0.95em;
-            word-break: break-all;
+            background: #f8f9fa; border-left: 4px solid #667eea;
+            padding: 15px 20px; border-radius: 4px; margin: 15px 0;
+            font-family: "SF Mono", Monaco, monospace; font-size: 0.95em; word-break: break-all;
         }
+        .url-box.green { border-left-color: #28a745; background: #f0fff4; }
         .url-box strong { color: #667eea; }
+        .url-box.green strong { color: #28a745; }
         ol, ul { padding-left: 25px; line-height: 1.8; }
         code {
-            background: #f4f4f4;
-            padding: 2px 8px;
-            border-radius: 3px;
-            font-family: "SF Mono", Monaco, monospace;
-            font-size: 0.9em;
-            color: #e83e8c;
+            background: #f4f4f4; padding: 2px 8px; border-radius: 3px;
+            font-family: "SF Mono", Monaco, monospace; font-size: 0.9em; color: #e83e8c;
         }
         pre {
-            background: #2d2d2d;
-            color: #f8f8f2;
-            padding: 20px;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin: 15px 0;
+            background: #2d2d2d; color: #f8f8f2; padding: 20px;
+            border-radius: 8px; overflow-x: auto; margin: 15px 0;
         }
         pre code { background: none; color: inherit; padding: 0; }
         .btn {
-            display: inline-block;
-            background: #667eea;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-            margin: 10px 5px;
-            transition: transform 0.2s;
+            display: inline-block; background: #667eea; color: white;
+            padding: 12px 30px; border-radius: 6px; text-decoration: none;
+            font-weight: bold; margin: 10px 5px; transition: transform 0.2s;
         }
         .btn:hover { transform: translateY(-2px); }
         .btn-green { background: #28a745; }
         .btn-orange { background: #fd7e14; }
         .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px; margin-top: 20px;
         }
         .feature {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
+            background: #f8f9fa; padding: 15px; border-radius: 8px; text-align: center;
         }
         .feature-icon { font-size: 2em; margin-bottom: 5px; }
+        .success {
+            background: #d4edda; border: 1px solid #c3e6cb; color: #155724;
+            padding: 15px; border-radius: 8px; margin: 15px 0;
+        }
+        h3 { color: #2c3e50; margin-top: 20px; }
+        h3.green { color: #28a745; }
+        h3.orange { color: #fd7e14; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="hero">
-            <h1>🤖 AI Siyuan Agent</h1>
+            <h1>🤖 JHQXX All-Package</h1>
             <p class="subtitle">Spring Boot 3 + Spring AI 智能体项目脚手架</p>
             <div>
+                <span class="badge green">✅ 已发布到 Maven Central</span>
                 <span class="badge">Spring Boot 3.3</span>
                 <span class="badge">Spring AI 1.0</span>
                 <span class="badge">Java 17</span>
-                <span class="badge">Maven</span>
             </div>
         </div>
 
         <div class="card">
-            <h2>🎯 两种使用方式</h2>
+            <h2>🎯 三种使用方式</h2>
 
-            <h3 style="margin-top: 20px; color: #28a745;">方式 1：使用 GitHub 模板（推荐 ⭐）</h3>
-            <p style="margin: 10px 0;">点击下方按钮，一键基于此模板创建新项目：</p>
-            <a href="https://github.com/JHQXX/ai-siyuan-agent/generate" class="btn btn-green">
-                🚀 Use this template
-            </a>
-            <p style="margin-top: 15px; color: #666; font-size: 0.9em;">
-                然后在 IDEA 中: <code>File → New → Project from Version Control</code> 粘贴仓库 URL
+            <div class="success">
+                <strong>🎉 刚刚发布成功！</strong> 你的脚手架已经可以从 Maven 中央仓库下载，全世界的人都能用！
+            </div>
+
+            <h3 class="green">方式 1：IDEA 自定义 Catalog（⭐ 推荐 - 干净的列表）</h3>
+            <p style="margin: 10px 0;">在 IDEA 中 <strong>File → New → Project → Maven Archetype</strong>：</p>
+            <ol>
+                <li>点击 <strong>"Manage catalogs..."</strong></li>
+                <li>点击 <strong>"+"</strong> → <strong>"Add Catalog"</strong></li>
+                <li>填写以下两个字段：</li>
+            </ol>
+            <div class="url-box green">
+                <strong>Location:</strong><br>
+                https://jhqxx.github.io/all-package/jhqxx-catalog.xml
+            </div>
+            <div class="url-box green">
+                <strong>Name:</strong><br>
+                JHQXX 脚手架
+            </div>
+            <p style="margin-top: 15px; color: #28a745; font-weight: bold;">
+                ✅ 这样 IDEA 列表里 <strong>只显示你自己的脚手架</strong>，不会混入 Maven Central 的几千个！
             </p>
 
-            <h3 style="margin-top: 30px; color: #fd7e14;">方式 2：Maven Archetype（适合 IDEA）</h3>
-            <p style="margin: 10px 0;">在 IDEA 的 New Project 对话框中：</p>
-            <ol>
-                <li>选择 <strong>Maven Archetype</strong> 模板</li>
-                <li>点击 <strong>"Manage catalogs..."</strong> 添加 Catalog</li>
-            </ol>
+            <h3 class="orange">方式 2：Maven Central Catalog（默认列表里查找）</h3>
+            <p style="margin: 10px 0;">使用 IDEA 自带的 Maven Central Catalog：</p>
             <div class="url-box">
                 <strong>Catalog URL:</strong><br>
-                https://jhqxx.github.io/ai-siyuan-agent/archetype-catalog.xml
+                https://repo.maven.apache.org/maven2/archetype-catalog.xml
             </div>
+            <p style="margin-top: 10px; color: #666;">⚠️ 这个列表里有 <strong>成千上万</strong> 个脚手架，需要搜索 <code>springai-agent-archetype</code></p>
+
+            <h3>方式 3：命令行直接生成</h3>
+            <pre><code>mvn archetype:generate \
+  -DarchetypeGroupId=io.github.jhqxx \
+  -DarchetypeArtifactId=springai-agent-archetype \
+  -DarchetypeVersion=1.0.0 \
+  -DgroupId=com.example \
+  -DartifactId=my-agent \
+  -Dpackage=com.example.agent \
+  -DinteractiveMode=false</code></pre>
         </div>
 
         <div class="card">
@@ -189,10 +171,9 @@
         </div>
 
         <div class="card">
-            <h2>🚀 快速开始（基于模板项目）</h2>
-            <pre><code># 1. 通过 "Use this template" 创建仓库后，克隆到本地
-git clone https://github.com/你的用户名/你的项目名.git
-cd 你的项目名
+            <h2>🚀 快速开始（生成项目后）</h2>
+            <pre><code># 1. 进入生成的项目目录
+cd my-agent
 
 # 2. 配置环境变量
 cp .env.example .env
@@ -201,7 +182,7 @@ cp .env.example .env
 # 3. 运行
 ./mvnw spring-boot:run
 
-# 4. 测试
+# 4. 测试 API
 curl -X POST http://localhost:8080/api/chat \
   -H "Content-Type: application/json" \
   -d '{"message":"你好"}'</code></pre>
@@ -221,9 +202,10 @@ curl -X POST http://localhost:8080/api/chat \
         <div class="card">
             <h2>🔗 相关链接</h2>
             <ul>
-                <li>📦 仓库地址: <a href="https://github.com/JHQXX/ai-siyuan-agent">github.com/JHQXX/ai-siyuan-agent</a></li>
+                <li>📦 GitHub 仓库: <a href="https://github.com/JHQXX/all-package">github.com/JHQXX/all-package</a></li>
+                <li>🌐 Maven Central: <a href="https://repo.maven.apache.org/maven2/io/github/jhqxx/springai-agent-archetype/">maven.apache.org</a></li>
                 <li>📖 Spring AI 文档: <a href="https://docs.spring.io/spring-ai/reference/">spring.io/spring-ai</a></li>
-                <li>💬 问题反馈: <a href="https://github.com/JHQXX/ai-siyuan-agent/issues">Issues</a></li>
+                <li>💬 问题反馈: <a href="https://github.com/JHQXX/all-package/issues">Issues</a></li>
             </ul>
         </div>
     </div>
