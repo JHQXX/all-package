@@ -1,37 +1,32 @@
+# Maven 构建产物
+**/target/
+*.jar
+*.pom
+*.pom.asc
+*.jar.asc
+*.md5
+*.sha1
+
+# 临时发布文件
+central-bundle.zip
+
 # Python
 __pycache__/
 *.py[cod]
 *$py.class
-*.so
-.Python
 venv/
 env/
-ENV/
 
 # 环境变量
 .env
 .env.local
-.env.*.local
 
 # IDE
 .idea/
 .vscode/
-*.swp
-*.swo
-*~
+*.iml
+*.iws
+*.ipr
 
-# 数据
-data/faiss_index/
-*.db
-
-# 系统文件
+# 系统
 .DS_Store
-Thumbs.db
-
-# 日志
-*.log
-logs/
-
-# Maven Archetype
-maven-archetype/target/
-maven-archetype/repo/
