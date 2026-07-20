@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  私有 Maven Archetype Catalog
-  路径: https://jhqxx.github.io/all-package/jhqxx-catalog.xml
-  说明: 只包含 JHQXX 自己的脚手架，不混入 Maven Central 的其他模板
--->
-<archetype-catalog xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-catalog/2.0.0"
-                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-catalog/2.0.0 http://maven.apache.org/xsd/archetype-catalog-2.0.0.xsd">
-
+<archetype-catalog>
     <archetypes>
-        <!-- springai-agent-archetype: Spring Boot 3 + Spring AI 智能体脚手架 -->
         <archetype>
             <groupId>io.github.jhqxx</groupId>
             <artifactId>springai-agent-archetype</artifactId>
@@ -18,11 +9,7 @@
                 <id>central</id>
                 <url>https://repo.maven.apache.org/maven2</url>
             </repository>
-            <description>
-                Spring Boot 3 + Spring AI 智能体项目脚手架。
-                包含 ChatClient 对话客户端、@Tool 工具调用、RAG 向量存储、REST API。
-                从 Maven Central 自动下载。
-            </description>
+            <description>Spring Boot 3 + Spring AI agent scaffold with ChatClient, @Tool, RAG, REST API</description>
         </archetype>
     </archetypes>
 </archetype-catalog>
