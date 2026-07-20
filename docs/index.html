@@ -2,88 +2,230 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>SpringAI Agent Archetype Catalog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Siyuan Agent - SpringAI 项目脚手架</title>
     <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #333;
+        }
+        .container {
             max-width: 900px;
-            margin: 50px auto;
-            padding: 20px;
-            line-height: 1.6;
+            margin: 0 auto;
         }
-        h1 { color: #2c3e50; }
-        code {
-            background: #f4f4f4;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: "SF Mono", Monaco, monospace;
+        .hero {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            text-align: center;
         }
-        pre {
-            background: #f4f4f4;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+        .badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin: 5px;
         }
         .card {
-            background: #fff;
-            border: 1px solid #e1e4e8;
-            border-radius: 6px;
-            padding: 20px;
-            margin: 20px 0;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
         }
         .url-box {
-            background: #e3f2fd;
-            padding: 15px;
-            border-left: 4px solid #2196f3;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px 20px;
+            border-radius: 4px;
+            margin: 15px 0;
+            font-family: "SF Mono", Monaco, monospace;
+            font-size: 0.95em;
+            word-break: break-all;
+        }
+        .url-box strong { color: #667eea; }
+        ol, ul { padding-left: 25px; line-height: 1.8; }
+        code {
+            background: #f4f4f4;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, monospace;
+            font-size: 0.9em;
+            color: #e83e8c;
+        }
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
             margin: 15px 0;
         }
+        pre code { background: none; color: inherit; padding: 0; }
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px 5px;
+            transition: transform 0.2s;
+        }
+        .btn:hover { transform: translateY(-2px); }
+        .btn-green { background: #28a745; }
+        .btn-orange { background: #fd7e14; }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .feature {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .feature-icon { font-size: 2em; margin-bottom: 5px; }
     </style>
 </head>
 <body>
-    <h1>SpringAI Agent Maven Archetype</h1>
-
-    <div class="card">
-        <h2>📦 Catalog URL</h2>
-        <div class="url-box">
-            <strong>Catalog:</strong> <code>https://jhqxx.github.io/ai-siyuan-agent/archetype-catalog.xml</code>
+    <div class="container">
+        <div class="hero">
+            <h1>🤖 AI Siyuan Agent</h1>
+            <p class="subtitle">Spring Boot 3 + Spring AI 智能体项目脚手架</p>
+            <div>
+                <span class="badge">Spring Boot 3.3</span>
+                <span class="badge">Spring AI 1.0</span>
+                <span class="badge">Java 17</span>
+                <span class="badge">Maven</span>
+            </div>
         </div>
 
-        <h3>🚀 在 IntelliJ IDEA 中使用</h3>
-        <ol>
-            <li>打开 <strong>File → New → Project</strong></li>
-            <li>选择 <strong>Maven</strong> 模板</li>
-            <li>勾选 <strong>"Create from archetype"</strong></li>
-            <li>点击 <strong>"Add Archetype..."</strong></li>
-            <li>填写：
-                <ul>
-                    <li>GroupId: <code>io.github.jhqxx</code></li>
-                    <li>ArtifactId: <code>springai-agent-archetype</code></li>
-                    <li>Version: <code>1.0.0</code></li>
-                    <li>Repository: <code>https://jhqxx.github.io/ai-siyuan-agent/maven-archetype/repo/</code></li>
-                </ul>
-            </li>
-        </ol>
+        <div class="card">
+            <h2>🎯 两种使用方式</h2>
 
-        <h3>🛠 使用 Maven 命令行</h3>
-        <pre>mvn archetype:generate \
-  -DarchetypeGroupId=io.github.jhqxx \
-  -DarchetypeArtifactId=springai-agent-archetype \
-  -DarchetypeVersion=1.0.0 \
-  -DgroupId=com.mycompany \
-  -DartifactId=my-agent \
-  -DarchetypeRepository=https://jhqxx.github.io/ai-siyuan-agent/maven-archetype/repo/</pre>
-    </div>
+            <h3 style="margin-top: 20px; color: #28a745;">方式 1：使用 GitHub 模板（推荐 ⭐）</h3>
+            <p style="margin: 10px 0;">点击下方按钮，一键基于此模板创建新项目：</p>
+            <a href="https://github.com/JHQXX/ai-siyuan-agent/generate" class="btn btn-green">
+                🚀 Use this template
+            </a>
+            <p style="margin-top: 15px; color: #666; font-size: 0.9em;">
+                然后在 IDEA 中: <code>File → New → Project from Version Control</code> 粘贴仓库 URL
+            </p>
 
-    <div class="card">
-        <h2>✨ 包含内容</h2>
-        <ul>
-            <li>Spring Boot 3.3 + Spring AI 1.0</li>
-            <li>ChatClient Bean 配置</li>
-            <li>3 个示例工具：WeatherTool, CalculatorTool, DateTimeTool</li>
-            <li>RAG 服务（自动加载 <code>data/*.txt</code>）</li>
-            <li>REST API: /api/chat, /api/agent, /api/rag, /api/stream</li>
-            <li>流式对话（SSE）支持</li>
-        </ul>
+            <h3 style="margin-top: 30px; color: #fd7e14;">方式 2：Maven Archetype（适合 IDEA）</h3>
+            <p style="margin: 10px 0;">在 IDEA 的 New Project 对话框中：</p>
+            <ol>
+                <li>选择 <strong>Maven Archetype</strong> 模板</li>
+                <li>点击 <strong>"Manage catalogs..."</strong> 添加 Catalog</li>
+            </ol>
+            <div class="url-box">
+                <strong>Catalog URL:</strong><br>
+                https://jhqxx.github.io/ai-siyuan-agent/archetype-catalog.xml
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>✨ 包含内容</h2>
+            <div class="feature-grid">
+                <div class="feature">
+                    <div class="feature-icon">⚙️</div>
+                    <strong>ChatClient</strong>
+                    <p style="font-size: 0.9em; color: #666;">统一的 LLM 调用接口</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔧</div>
+                    <strong>@Tool 工具</strong>
+                    <p style="font-size: 0.9em; color: #666;">3 个示例工具</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📚</div>
+                    <strong>RAG 知识库</strong>
+                    <p style="font-size: 0.9em; color: #666;">自动加载文档</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🌐</div>
+                    <strong>REST API</strong>
+                    <p style="font-size: 0.9em; color: #666;">4 个端点</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📡</div>
+                    <strong>流式输出</strong>
+                    <p style="font-size: 0.9em; color: #666;">SSE 支持</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🎨</div>
+                    <strong>可定制</strong>
+                    <p style="font-size: 0.9em; color: #666;">改包名即可</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🚀 快速开始（基于模板项目）</h2>
+            <pre><code># 1. 通过 "Use this template" 创建仓库后，克隆到本地
+git clone https://github.com/你的用户名/你的项目名.git
+cd 你的项目名
+
+# 2. 配置环境变量
+cp .env.example .env
+# 编辑 .env，填入 OPENAI_API_KEY
+
+# 3. 运行
+./mvnw spring-boot:run
+
+# 4. 测试
+curl -X POST http://localhost:8080/api/chat \
+  -H "Content-Type: application/json" \
+  -d '{"message":"你好"}'</code></pre>
+        </div>
+
+        <div class="card">
+            <h2>📋 API 端点</h2>
+            <ul>
+                <li><code>POST /api/chat</code> - 简单对话</li>
+                <li><code>POST /api/agent</code> - 智能体对话（带工具调用）</li>
+                <li><code>POST /api/stream</code> - 流式对话（SSE）</li>
+                <li><code>POST /api/rag</code> - RAG 知识库问答</li>
+                <li><code>GET /api/health</code> - 健康检查</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>🔗 相关链接</h2>
+            <ul>
+                <li>📦 仓库地址: <a href="https://github.com/JHQXX/ai-siyuan-agent">github.com/JHQXX/ai-siyuan-agent</a></li>
+                <li>📖 Spring AI 文档: <a href="https://docs.spring.io/spring-ai/reference/">spring.io/spring-ai</a></li>
+                <li>💬 问题反馈: <a href="https://github.com/JHQXX/ai-siyuan-agent/issues">Issues</a></li>
+            </ul>
+        </div>
     </div>
 </body>
 </html>
