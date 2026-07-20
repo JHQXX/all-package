@@ -33,7 +33,7 @@ POM_XML_CONTENT = r'''<?xml version="1.0" encoding="UTF-8"?>
         <relativePath/>
     </parent>
 
-    <groupId>com.example</groupId>
+    <groupId>{group_id}</groupId>
     <artifactId>{artifact_id}</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>{project_name}</name>
@@ -112,7 +112,7 @@ POM_XML_CONTENT = r'''<?xml version="1.0" encoding="UTF-8"?>
 
 # ========== 启动类 ==========
 
-APP_JAVA_CONTENT = '''package com.example.agent;
+APP_JAVA_CONTENT = '''package {base_package};
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -137,7 +137,7 @@ public class AgentApplication {
 
 # ========== AI 配置类 ==========
 
-AI_CONFIG_JAVA = '''package com.example.agent.config;
+AI_CONFIG_JAVA = '''package {base_package}.config;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatModel;
@@ -183,7 +183,7 @@ public class AiConfig {
 
 # ========== 应用配置 ==========
 
-APP_PROPERTIES_JAVA = '''package com.example.agent.config;
+APP_PROPERTIES_JAVA = '''package {base_package}.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -214,7 +214,7 @@ public class AppProperties {
 
 # ========== 工具类 ==========
 
-WEATHER_TOOL_JAVA = '''package com.example.agent.tools;
+WEATHER_TOOL_JAVA = '''package {base_package}.tools;
 
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
@@ -255,7 +255,7 @@ public class WeatherTool {
 }
 '''
 
-CALCULATOR_TOOL_JAVA = '''package com.example.agent.tools;
+CALCULATOR_TOOL_JAVA = '''package {base_package}.tools;
 
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
@@ -289,7 +289,7 @@ public class CalculatorTool {
 }
 '''
 
-DATETIME_TOOL_JAVA = '''package com.example.agent.tools;
+DATETIME_TOOL_JAVA = '''package {base_package}.tools;
 
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.stereotype.Component;
@@ -325,7 +325,7 @@ public class DateTimeTool {
 
 # ========== 智能体服务 ==========
 
-AGENT_SERVICE_JAVA = '''package com.example.agent.service;
+AGENT_SERVICE_JAVA = '''package {base_package}.service;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatResponse;
@@ -372,9 +372,9 @@ public class AgentService {
     public String agentChat(String userMessage) {
         ChatResponse response = chatClient.prompt()
             .user(userMessage)
-            .tools(new com.example.agent.tools.WeatherTool(),
-                   new com.example.agent.tools.CalculatorTool(),
-                   new com.example.agent.tools.DateTimeTool())
+            .tools(new {base_package}.tools.WeatherTool(),
+                   new {base_package}.tools.CalculatorTool(),
+                   new {base_package}.tools.DateTimeTool())
             .call()
             .chatResponse();
 
@@ -395,11 +395,11 @@ public class AgentService {
 
 # 为了简化，我们用更直接的实现
 
-AGENT_SERVICE_SIMPLE_JAVA = '''package com.example.agent.service;
+AGENT_SERVICE_SIMPLE_JAVA = '''package {base_package}.service;
 
-import com.example.agent.tools.CalculatorTool;
-import com.example.agent.tools.DateTimeTool;
-import com.example.agent.tools.WeatherTool;
+import {base_package}.tools.CalculatorTool;
+import {base_package}.tools.DateTimeTool;
+import {base_package}.tools.WeatherTool;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.stereotype.Service;
 
@@ -461,7 +461,7 @@ public class AgentService {
 
 # ========== RAG 服务 ==========
 
-RAG_SERVICE_JAVA = '''package com.example.agent.service;
+RAG_SERVICE_JAVA = '''package {base_package}.service;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.ai.chat.client.ChatClient;
@@ -589,12 +589,12 @@ public class RagService {
 
 # ========== Controller ==========
 
-AGENT_CONTROLLER_JAVA = '''package com.example.agent.controller;
+AGENT_CONTROLLER_JAVA = '''package {base_package}.controller;
 
-import com.example.agent.dto.ChatRequest;
-import com.example.agent.dto.ChatResponse;
-import com.example.agent.service.AgentService;
-import com.example.agent.service.RagService;
+import {base_package}.dto.ChatRequest;
+import {base_package}.dto.ChatResponse;
+import {base_package}.service.AgentService;
+import {base_package}.service.RagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -668,7 +668,7 @@ public class AgentController {
 
 # ========== DTO ==========
 
-CHAT_REQUEST_JAVA = '''package com.example.agent.dto;
+CHAT_REQUEST_JAVA = '''package {base_package}.dto;
 
 /**
  * 聊天请求 DTO
@@ -687,7 +687,7 @@ public class ChatRequest {
 }
 '''
 
-CHAT_RESPONSE_JAVA = '''package com.example.agent.dto;
+CHAT_RESPONSE_JAVA = '''package {base_package}.dto;
 
 /**
  * 聊天响应 DTO
@@ -746,7 +746,7 @@ app:
 logging:
   level:
     root: INFO
-    com.example.agent: DEBUG
+    {base_package}: DEBUG
     org.springframework.ai: INFO
 '''
 
@@ -759,7 +759,7 @@ spring:
 
 logging:
   level:
-    com.example.agent: DEBUG
+    {base_package}: DEBUG
 '''
 
 # ========== 系统提示词 ==========
@@ -780,7 +780,7 @@ SYSTEM_PROMPT_ST = '''你是一个专业的 AI 助手，名字叫 {agent_name}�
 
 # ========== 测试类 ==========
 
-TEST_JAVA = '''package com.example.agent;
+TEST_JAVA = '''package {base_package};
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -942,17 +942,18 @@ public class MyTool {{
 
 # ========== 脚手架生成器 ==========
 
-def create_springai_scaffold(project_name: str):
+def create_springai_scaffold(project_name: str, group_id: str = "io.github.jhqxx"):
     """创建 SpringAI 脚手架"""
 
     artifact_id = project_name.lower().replace(" ", "-").replace("_", "-")
-    base_package = "com.example.agent"
+    base_package = f"{group_id}.agent"
     agent_name = project_name.replace("-", " ").title()
 
     project_root = Path(project_name)
 
     print(f"🚀 创建 SpringAI 脚手架: {project_name}")
     print(f"📁 目录: {project_root.absolute()}")
+    print(f"📦 Maven GroupId: {group_id}")
     print(f"📦 包名: {base_package}\n")
 
     # 创建目录
@@ -974,11 +975,10 @@ def create_springai_scaffold(project_name: str):
 
     # 文件映射
     files = {
-        "pom.xml": POM_XML_CONTENT.replace(
-            "{project_name}", project_name
-        ).replace(
-            "{artifact_id}", artifact_id
-        ),
+        "pom.xml": POM_XML_CONTENT
+            .replace("{group_id}", group_id)
+            .replace("{project_name}", project_name)
+            .replace("{artifact_id}", artifact_id),
         ".gitignore": GITIGNORE_CONTENT,
         ".env.example": ENV_EXAMPLE_CONTENT,
         "README.md": README_CONTENT.format(
@@ -1039,6 +1039,11 @@ def create_springai_scaffold(project_name: str):
     for filepath, content in files.items():
         full_path = project_root / filepath
         full_path.parent.mkdir(parents=True, exist_ok=True)
+
+        # 替换 Java 文件中的包名占位符
+        if filepath.endswith(".java"):
+            content = content.replace("{base_package}", base_package)
+
         full_path.write_text(content, encoding="utf-8")
         print(f"  📄 {filepath}")
 
@@ -1066,9 +1071,14 @@ def create_springai_scaffold(project_name: str):
 def main():
     parser = argparse.ArgumentParser(description="SpringAI 脚手架生成器")
     parser.add_argument("project_name", help="项目名称")
+    parser.add_argument(
+        "--group-id",
+        default="io.github.jhqxx",
+        help="Maven groupId（默认: io.github.jhqxx）"
+    )
 
     args = parser.parse_args()
-    create_springai_scaffold(args.project_name)
+    create_springai_scaffold(args.project_name, args.group_id)
 
 
 if __name__ == "__main__":
