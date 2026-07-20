@@ -25,7 +25,11 @@
                 <include>**/*.java</include>
             </includes>
         </fileSet>
-        <fileSet filtered="false">
+        <!--
+            application.yml 用 #[[ ... ]]# Velocity 转义语法包住 Spring 占位符，
+            这样 Maven 不会替换它们，但 archetype 占位符（不带 #[[ ]]# 的）会被替换。
+        -->
+        <fileSet filtered="true">
             <directory>src/main/resources</directory>
             <includes>
                 <include>**/*.yml</include>

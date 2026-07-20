@@ -3,26 +3,29 @@ server:
 
 spring:
   application:
+    # Archetype 占位符（会被 Maven 替换）
     name: ${artifactId}
 
   ai:
     openai:
-      api-key: ${OPENAI_API_KEY:your_api_key_here}
-      base-url: ${OPENAI_BASE_URL:https://api.openai.com/v1}
+      # Spring 配置占位符（被 #[[ ]]# Velocity 转义，Maven 不会动它们）
+      api-key: "#[[${OPENAI_API_KEY:your_api_key_here}]]#"
+      base-url: "#[[${OPENAI_BASE_URL:https://api.openai.com/v1}]]#"
       chat:
         options:
-          model: ${LLM_MODEL:gpt-3.5-turbo}
+          model: "#[[${LLM_MODEL:gpt-3.5-turbo}]]#"
           temperature: 0.7
       embedding:
         options:
           model: text-embedding-ada-002
 
 app:
+  # Archetype 占位符
   name: ${artifactId}
   version: 1.0.0
 
 logging:
   level:
     root: INFO
-    io.github.jhqxx.agent: DEBUG
+    ${package}: DEBUG
     org.springframework.ai: INFO
