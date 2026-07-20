@@ -1,0 +1,22 @@
+# LangChain 知识库
+
+## 什么是 LangChain？
+
+LangChain 是一个用于构建大语言模型（LLM）应用的开发框架。
+它提供了链、智能体、工具等核心组件。
+
+## 核心组件
+
+1. Models（模型）：各种 LLM 和嵌入模型
+2. Prompts（提示词）：模板化提示词管理
+3. Chains（链）：组合多个步骤
+4. Agents（智能体）：让 LLM 自主决策
+5. Memory（记忆）：保存对话历史
+6. Retrieval（检索）：从知识库检索
+
+## Spring AI 对应
+
+Spring AI 是 Java 生态的 AI 框架：
+- ChatClient ≈ Python 的 ChatOpenAI
+- @Tool 注解 ≈ Python 的 @tool 装饰器
+- VectorStore ≈ FAISS / Chroma

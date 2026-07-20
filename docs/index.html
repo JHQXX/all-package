@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>SpringAI Agent Archetype Catalog</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 { color: #2c3e50; }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .card {
+            background: #fff;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .url-box {
+            background: #e3f2fd;
+            padding: 15px;
+            border-left: 4px solid #2196f3;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>SpringAI Agent Maven Archetype</h1>
+
+    <div class="card">
+        <h2>📦 Catalog URL</h2>
+        <div class="url-box">
+            <strong>Catalog:</strong> <code>https://jhqxx.github.io/ai-siyuan-agent/archetype-catalog.xml</code>
+        </div>
+
+        <h3>🚀 在 IntelliJ IDEA 中使用</h3>
+        <ol>
+            <li>打开 <strong>File → New → Project</strong></li>
+            <li>选择 <strong>Maven</strong> 模板</li>
+            <li>勾选 <strong>"Create from archetype"</strong></li>
+            <li>点击 <strong>"Add Archetype..."</strong></li>
+            <li>填写：
+                <ul>
+                    <li>GroupId: <code>io.github.jhqxx</code></li>
+                    <li>ArtifactId: <code>springai-agent-archetype</code></li>
+                    <li>Version: <code>1.0.0</code></li>
+                    <li>Repository: <code>https://jhqxx.github.io/ai-siyuan-agent/maven-archetype/repo/</code></li>
+                </ul>
+            </li>
+        </ol>
+
+        <h3>🛠 使用 Maven 命令行</h3>
+        <pre>mvn archetype:generate \
+  -DarchetypeGroupId=io.github.jhqxx \
+  -DarchetypeArtifactId=springai-agent-archetype \
+  -DarchetypeVersion=1.0.0 \
+  -DgroupId=com.mycompany \
+  -DartifactId=my-agent \
+  -DarchetypeRepository=https://jhqxx.github.io/ai-siyuan-agent/maven-archetype/repo/</pre>
+    </div>
+
+    <div class="card">
+        <h2>✨ 包含内容</h2>
+        <ul>
+            <li>Spring Boot 3.3 + Spring AI 1.0</li>
+            <li>ChatClient Bean 配置</li>
+            <li>3 个示例工具：WeatherTool, CalculatorTool, DateTimeTool</li>
+            <li>RAG 服务（自动加载 <code>data/*.txt</code>）</li>
+            <li>REST API: /api/chat, /api/agent, /api/rag, /api/stream</li>
+            <li>流式对话（SSE）支持</li>
+        </ul>
+    </div>
+</body>
+</html>
